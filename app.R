@@ -46,8 +46,11 @@ server <- function(input, output) {
     
     img <- image() %>% 
       array_reshape(., dim = c(1, dim(.), 1))
-    
-    paste0("The predicted object is ", predict_classes(model, img))
+        
+    categories = c("flower", "mushroom", "tree")
+    probability=c(predict(model, img))
+    pred_name = categories[which.max(probability)]
+    paste0("The predicted object is ", pred_name, " with probality: ", probability[which.max(probability)])
   })
   
   output$image <- renderPlot({
