@@ -39,7 +39,7 @@ server <- function(input, output) {
   
   image <- reactive({
     req(input$Pic1)
-    jpeg::readJPEG(input$Pic1$datapath)
+    image_array_resize(jpeg::readJPEG(input$Pic1$datapath), height=160, width=160, data_format = c("channels_last"))
   })
   
   output$prediction <- renderText({
